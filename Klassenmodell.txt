@@ -1,0 +1,58 @@
+@startuml
+'Manual Master zur pflege von Anleitungen und der Umsetzung von Abläufen zur Erstellung und Freigabe von Anleitungen.
+'Beziehungen des Systems
+class Produkt {
+    String name
+    Land[] länder
+    Sperre gesperrt
+    'anleitungHochladen()
+    'anleitungLöschen()
+}
+class Anleitung {
+    Blob Datei
+    Status sprachlichFreigegeben
+    Status technischFreigegeben
+    Benutzer ersteller
+}
+class Land {
+    String name
+    Sprache[] sprachen
+}
+class Sprache {
+    String name
+    Anleitung anleitung
+}
+
+'Status vererbt an Zurückweisung und Freigabe
+abstract Status {
+    String grund
+}
+class Zurückweisung {
+    Benutzer zurückgewiesenVon
+}
+class Freigabe {  
+    Benutzer freigegebenVon
+}
+class Sperre {
+    Benutzer gesperrtVon
+}
+
+'Beziehungen der Benutzer
+class Benutzer {
+    String name
+    Bool istProduktManager
+    Bool istÜbersetzer
+    Bool istFachprüfer
+    Bool istSpachprüfer
+    anmelden()
+}
+class Administrator {
+    String name
+    editUser()
+    exportBericht()
+    deleteÜbersetzung()
+    deleteProdukt()
+}
+
+
+@enduml
