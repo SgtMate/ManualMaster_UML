@@ -3,39 +3,29 @@
 'Beziehungen des Systems
 class Produkt {
     String name
-    Land[] länder
-    Sperre gesperrt
     'anleitungHochladen()
     'anleitungLöschen()
 }
 class Anleitung {
-    Blob Datei
     Status sprachlichFreigegeben
     Status technischFreigegeben
     Benutzer ersteller
 }
+class Datei
 class Land {
     String name
-    Sprache[] sprachen
 }
 class Sprache {
     String name
-    Anleitung anleitung
 }
 
 'Status vererbt an Zurückweisung und Freigabe
 abstract Status {
     String grund
 }
-class Zurückweisung {
-    Benutzer zurückgewiesenVon
-}
-class Freigabe {  
-    Benutzer freigegebenVon
-}
-class Sperre {
-    Benutzer gesperrtVon
-}
+class Zurückweisung
+class Freigabe
+class Sperre
 
 'Beziehungen der Benutzer
 class Benutzer {
@@ -54,5 +44,21 @@ class Administrator {
     deleteProdukt()
 }
 
+'Beziehungen
+Status <|-- Zurückweisung
+Status <|-- Freigabe
+
+Produkt "0..*" -- "1..*" Land : vertriebenIn
+Produkt "1" *-- "0..1" Sperre
+Land "1" *-- "1..*" Sprache : gesprochenIn
+Produkt "1" *-- "1" Anleitung
+Anleitung "1" *-- "1..*" Datei
+Datei "1..*" -- "1" Sprache : verfasstIn
+
+Benutzer "1" -- "0..*" Zurückweisung : zurückgewiesenVon
+Benutzer "1" -- "0..*" Freigabe : freigegebenVon
+
+Sperre "1" -- "1" Benutzer : gesperrtVon
+Status "0..2" -- "1" Anleitung : freigabestatusErteilt
 
 @enduml
