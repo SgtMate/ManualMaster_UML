@@ -1,10 +1,8 @@
-@startuml
+@startuml Aufgabe_1a
 'Manual Master zur pflege von Anleitungen und der Umsetzung von Abläufen zur Erstellung und Freigabe von Anleitungen.
 'Beziehungen des Systems
 class Produkt {
     String name
-    'anleitungHochladen()
-    'anleitungLöschen()
 }
 class Anleitung {
     Status sprachlichFreigegeben
@@ -19,7 +17,6 @@ class Sprache {
     String name
 }
 
-'Status vererbt an Zurückweisung und Freigabe
 abstract Status {
     String grund
 }
@@ -28,37 +25,84 @@ class Freigabe
 class Sperre
 
 'Beziehungen der Benutzer
+'TODO: Landsprachkombinationen hinzufügen als element
 class Benutzer {
     String name
-    Bool istProduktManager
-    Bool istÜbersetzer
-    Bool istFachprüfer
-    Bool istSpachprüfer
     anmelden()
 }
+abstract Rolle
+class ProduktManager {
+    addProdukt(String name)
+    editProdukt(Produkt produkt)
+    getStatusÜbersetzungen()
+    setSperre(Produkt produkt, Bool gesperrt)
+}
+class Übersetzer {
+    getStatusÜbersetzungen()
+    getZurückweisungen()
+    postAnleitung(Anleitung anleitung, Land land, Sprache sprache)
+}
+class Fachprüfer {
+    getAnleitungen()
+    setAnleitungFreigegeben(Anleitung anleitung)
+    setAnleitungFreigegeben(Anleitung anleitung, String grund)
+    setAnleitungZurückgewiesen(Anleitung anleitung, String grund)
+}
+class Sprachprüfer {
+    getAnleitungen()
+    setAnleitungFreigegeben(Anleitung anleitung)
+    setAnleitungFreigegeben(Anleitung anleitung, String grund)
+    setAnleitungZurückgewiesen(Anleitung anleitung, String grund)
+}
+
+
 class Administrator {
     String name
-    editUser()
+    anmelden()
+    addLand()
+    editLand(Land land)
+    addSprache()
+    editSprache(Sprache sprache)
+    editUser(String name, Bool[] rollen)
     exportBericht()
-    deleteÜbersetzung()
-    deleteProdukt()
+    deleteÜbersetzung(Anleitung anleitung)
+    deleteProdukt(Produkt produkt)
 }
 
 'Beziehungen
 Status <|-- Zurückweisung
 Status <|-- Freigabe
+Rolle <|-- ProduktManager
+Rolle <|-- Übersetzer
+Rolle <|-- Fachprüfer
+Rolle <|-- Sprachprüfer
 
 Produkt "0..*" -- "1..*" Land : vertriebenIn
-Produkt "1" *-- "0..1" Sperre
 Land "1" *-- "1..*" Sprache : gesprochenIn
-Produkt "1" *-- "1" Anleitung
-Anleitung "1" *-- "1..*" Datei
-Datei "1..*" -- "1" Sprache : verfasstIn
+Datei "1" -- "1" Sprache : verfasstIn
+Produkt "1" *-- "0..1" Sperre
+Produkt "1" *-- "1..*" Anleitung
+Anleitung "1" *-- "1" Datei
+Benutzer "0..*" *-- "0..4" Rolle
 
-Benutzer "1" -- "0..*" Zurückweisung : zurückgewiesenVon
-Benutzer "1" -- "0..*" Freigabe : freigegebenVon
+Fachprüfer "1" -- "0..*" Zurückweisung : zurückgewiesenVon
+Fachprüfer "1" -- "0..*" Freigabe : freigegebenVon
+Sprachprüfer "1" -- "0..*" Zurückweisung : zurückgewiesenVon
+Sprachprüfer "1" -- "0..*" Freigabe : freigegebenVon
 
-Sperre "1" -- "1" Benutzer : gesperrtVon
-Status "0..2" -- "1" Anleitung : freigabestatusErteilt
+ProduktManager "1" -- "0..*" Produkt : verwaltet
+ProduktManager "1" -- "0..*" Sperre : erstellt
+Übersetzer "0..*" -- "0..*" Land : übersetzt
+Übersetzer "0..*" -- "0..*" Sprache : übersetzt
+Übersetzer "1" -- "0..*" Anleitung : lädtHoch
+Fachprüfer "1..*" -- "1" Produkt : prüft
+Sprachprüfer "1..*" -- "1" Sprache : prüft
+
+'Sehr unübersichtlich damit!
+'Administrator "1" -- "0..*" Land : verwaltet
+'Administrator "1" -- "0..*" Sprache : verwaltet
+'Administrator "1" -- "0..*" Benutzer : verwaltet
+'Administrator "1" -- "0..*" Produkt : verwaltet
+'Administrator "1" -- "0..*" Anleitung : verwaltet
 
 @enduml
