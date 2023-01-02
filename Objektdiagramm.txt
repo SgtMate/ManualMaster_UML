@@ -1,0 +1,101 @@
+@startuml Aufgabe_1b
+'Objekte
+object "Siggi:Benutzer" as b1 {
+    name = "Siggi"
+}
+object "Peter:Benutzer" as b2 {
+    name = "Peter"
+}
+object "Ulrich:Benutzer" as b3 {
+    name = "Ulrich"
+}
+
+object "Rolle1:Produktmanager" as pm1
+object "Rolle1:Sprachprüfer" as sp1
+object "Rolle1:Übersetzer" as ue1
+
+object "de:Sprache" as s1 {
+    name = "Deutsch"
+}
+object "DE:Land" as l1 {
+    name = "Deutschland"
+}
+object "LU:Land" as l2 {
+    name = "Luxemburg"
+}
+object "CH:Land" as l3 {
+    name = "Schweiz"
+}
+
+object "DE_de:Sprach_Land_Kombination" as slk1
+object "LU_de:Sprach_Land_Kombination" as slk2
+object "CH_de:Sprach_Land_Kombination" as slk3
+
+object "SmartToaster:Produkt" as p1 {
+    name = "Smart Toaster"
+}
+
+object "Anleitung1:Anleitung" as a1 {
+    sprachlicheFreigabe = Zurückweisung1:Zurückweisung
+    technischeFreigabe = Zurückweisung2:Zurückweisung
+    ersteller = Ulrich:Benutzer
+    datei = "AnleitungSmartToaster_LUde.pdf"
+}
+object "Anleitung2:Anleitung" as a2 {
+    sprachlicheFreigabe = Freigabe1:Freigabe
+    technischeFreigabe = null
+    ersteller = Ulrich:Benutzer
+    datei = "AnleitungSmartToaster_DEde.pdf"
+}
+
+object "Freigabe1:Freigabe" as f1 {
+    grund = ""
+}
+object "Zurückweisung1:Zurückweisung" as z1 {
+    grund = "Grammatik fehlerhaft"
+}
+'Benutzer Ferdinand und seine Rolle nicht erstellt!
+object "Zurückweisung2:Zurückweisung" as z2 {
+    grund = "Fehlerbehebungsbeschreibung unvollständig"
+}
+
+' Verbindungen
+b1 *-- sp1
+sp1 -- s1 : prüft
+b2 *-- pm1
+pm1 -- p1 : verwaltet
+b3 *-- ue1
+ue1 -- slk1 : übersetztFür
+ue1 -- slk2 : übersetztFür
+ue1 -- slk3 : übersetztFür
+
+slk1 o-- s1
+slk1 o-- l1
+slk2 o-- s1
+slk2 o-- l2
+slk3 o-- s1
+slk3 o-- l3
+
+s1 -- l1 : spricht
+s1 -- l2 : spricht
+s1 -- l3 : spricht
+
+p1 -- l1 : vertrieben
+p1 -- l2 : vertrieben
+p1 -- l3 : vertrieben
+
+p1 *-- a1
+p1 *-- a2
+
+a1 -- slk2 : verfasstIn
+a2 -- slk1 : verfasstIn
+ue1 -- a1 : lädtHoch
+ue1 -- a2 : lädtHoch
+
+sp1 -- f1 : freigegebenVon
+sp1 -- z1 : zurückgewiesenVon
+
+a2 -- f1
+a1 -- z1
+a1 -- z2
+@enduml

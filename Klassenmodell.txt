@@ -98,6 +98,7 @@ ProduktManager "1" -- "0..*" Sperre : erstellt
 Übersetzer "1" -- "0..*" Anleitung : lädtHoch
 Fachprüfer "1..*" -- "1" Produkt : prüft
 Sprachprüfer "1..*" -- "1" Sprache : prüft
+Anleitung "1" *-- "0..2" Status
 
 'Sehr unübersichtlich damit!
 'Administrator "1" -- "0..*" Land : verwaltet
