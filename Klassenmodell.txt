@@ -8,8 +8,8 @@ class Anleitung {
     Status sprachlichFreigegeben
     Status technischFreigegeben
     Benutzer ersteller
+    Blob datei
 }
-class Datei
 class Land {
     String name
 }
@@ -23,6 +23,7 @@ abstract Status {
 class Zurückweisung
 class Freigabe
 class Sperre
+class Land_Sprach_Kombination
 
 'Beziehungen der Benutzer
 'TODO: Landsprachkombinationen hinzufügen als element
@@ -77,12 +78,13 @@ Rolle <|-- Übersetzer
 Rolle <|-- Fachprüfer
 Rolle <|-- Sprachprüfer
 
-Produkt "0..*" -- "1..*" Land : vertriebenIn
-Land "1" *-- "1..*" Sprache : gesprochenIn
-Datei "1" -- "1" Sprache : verfasstIn
+Produkt "0..*" -- "1..*" Land : vertrieben
+Land "1..*" -- "1..*" Sprache : gesprochen
+Land_Sprach_Kombination "1" o-- "1" Land
+Land_Sprach_Kombination "1" o-- "1" Sprache
+Anleitung "1" -- "1" Land_Sprach_Kombination : verfasstIn
 Produkt "1" *-- "0..1" Sperre
 Produkt "1" *-- "1..*" Anleitung
-Anleitung "1" *-- "1" Datei
 Benutzer "0..*" *-- "0..4" Rolle
 
 Fachprüfer "1" -- "0..*" Zurückweisung : zurückgewiesenVon
@@ -92,8 +94,7 @@ Sprachprüfer "1" -- "0..*" Freigabe : freigegebenVon
 
 ProduktManager "1" -- "0..*" Produkt : verwaltet
 ProduktManager "1" -- "0..*" Sperre : erstellt
-Übersetzer "0..*" -- "0..*" Land : übersetzt
-Übersetzer "0..*" -- "0..*" Sprache : übersetzt
+Übersetzer "0..*" -- "0..*" Land_Sprach_Kombination : übersetztFür
 Übersetzer "1" -- "0..*" Anleitung : lädtHoch
 Fachprüfer "1..*" -- "1" Produkt : prüft
 Sprachprüfer "1..*" -- "1" Sprache : prüft
