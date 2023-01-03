@@ -1,0 +1,40 @@
+@startuml Aufgabe_2
+hide empty description
+'TODO: Statusreport ans System nötig um das Anzeigen zu ermöglichen!
+'Anleitung Hochladen
+[*] --> Hochgeladen : uploadAnleitung(Blob datei, Land land, Sprache sprache)
+Hochgeladen --> Hochgeladen : uploadAnleitung(Blob datei, Land land, Sprache sprache)
+SprachlichFreigegeben --> Hochgeladen : uploadAnleitung(Blob datei, Land land, Sprache sprache)
+FachlichFreigegeben --> Hochgeladen : uploadAnleitung(Blob datei, Land land, Sprache sprache)
+SprachlichZurückgewiesen --> Hochgeladen : uploadAnleitung(Blob datei, Land land, Sprache sprache)
+FachlichZurückgewiesen --> Hochgeladen : uploadAnleitung(Blob datei, Land land, Sprache sprache)
+Final --> Hochgeladen : uploadAnleitung(Blob datei, Land land, Sprache sprache) [Produkt.sperre = null]
+FachlichUndSprachlichZurückgewiesen --> Hochgeladen : uploadAnleitung(Blob datei, Land land, Sprache sprache)
+
+'Erste Freigabe/Zurückweisung
+Hochgeladen --> SprachlichFreigegeben : setAnleitungFreigegeben(Anleitung anleitung), setAnleitungFreigegeben(Anleitung anleitung, String grund) [Benutzer.rolle = Sprachprüfer & Benutzer != ersteller]
+Hochgeladen --> FachlichFreigegeben : setAnleitungFreigegeben(Anleitung anleitung), setAnleitungFreigegeben(Anleitung anleitung, String grund) [Benutzer.rolle = Fachprüfer & Benutzer != ersteller]
+Hochgeladen --> SprachlichZurückgewiesen : setAnleitungZurückgewiesen(Anleitung anleitung, String grund) [Benutzer.rolle = Sprachprüfer]
+Hochgeladen --> FachlichZurückgewiesen : setAnleitungZurückgewiesen(Anleitung anleitung, String grund) [Benutzer.rolle = Fachprüfer]
+
+'Zweite Freigabe/Zurückweisung
+SprachlichZurückgewiesen -> FachlichUndSprachlichZurückgewiesen : setAnleitungZurückgewiesen(Anleitung anleitung, String grund) [Benutzer.rolle = Fachprüfer]
+FachlichZurückgewiesen -> FachlichUndSprachlichZurückgewiesen : setAnleitungZurückgewiesen(Anleitung anleitung, String grund) [Benutzer.rolle = Sprachprüfer]
+SprachlichFreigegeben --> Final : setAnleitungFreigegeben(Anleitung anleitung), setAnleitungFreigegeben(Anleitung anleitung, String grund) [Benutzer.rolle = Fachprüfer & Benutzer != ersteller]
+FachlichFreigegeben --> Final : setAnleitungFreigegeben(Anleitung anleitung), setAnleitungFreigegeben(Anleitung anleitung, String grund) [Benutzer.rolle = Sprachprüfer & Benutzer != ersteller]
+
+'Anleitung Löschen
+Hochgeladen --> [*] : deleteÜbersetzung(Anleitung anleitung)
+SprachlichFreigegeben --> [*] : deleteÜbersetzung(Anleitung anleitung)
+FachlichFreigegeben --> [*] : deleteÜbersetzung(Anleitung anleitung)
+SprachlichZurückgewiesen --> [*] : deleteÜbersetzung(Anleitung anleitung)
+FachlichZurückgewiesen --> [*] : deleteÜbersetzung(Anleitung anleitung)
+Final --> [*] : deleteProdukt(Produkt produkt), deleteÜbersetzung(Anleitung anleitung) [Produkt.sperre = null]
+FachlichUndSprachlichZurückgewiesen --> [*] : deleteProdukt(Produkt produkt), deleteÜbersetzung(Anleitung anleitung)
+
+Hochgeladen --> [*] : deleteProdukt(Produkt produkt) [Produkt.sperre = null]
+SprachlichFreigegeben --> [*] : deleteProdukt(Produkt produkt) [Produkt.sperre = null]
+FachlichFreigegeben --> [*] : deleteProdukt(Produkt produkt) [Produkt.sperre = null]
+SprachlichZurückgewiesen --> [*] : deleteProdukt(Produkt produkt) [Produkt.sperre = null]
+FachlichZurückgewiesen --> [*] : deleteProdukt(Produkt produkt) [Produkt.sperre = null]
+@enduml

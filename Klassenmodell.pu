@@ -41,7 +41,7 @@ class ProduktManager {
 class Übersetzer {
     getStatusÜbersetzungen()
     getZurückweisungen()
-    postAnleitung(Anleitung anleitung, Land land, Sprache sprache)
+    uploadAnleitung(Blob datei, Land land, Sprache sprache)
 }
 class Fachprüfer {
     getAnleitungen()
