@@ -1,0 +1,98 @@
+@startuml Aufgabe_3a
+'Akteure
+actor :Produkt Manager: as PM
+actor :Übersetzer: as UE
+actor :Sprachprüfer: as SP
+actor :Fachprüfer: as FP
+actor :Benutzer: as B
+note "Alle Interaktionen mit dem System\nerfordern eine Anmeldung!" as Note1
+B .. Note1
+actor :Administrator: as A
+
+B <|-- PM
+B <|-- UE
+B <|-- SP
+B <|-- FP
+
+package ManualMaster {
+'Use Cases
+usecase "Produkt anlegen" as PA
+usecase "Produkt bearbeiten" as PB
+usecase "Produkt löschen" as PL
+usecase "Land anlegen" as LA
+usecase "Land bearbeiten" as LB
+usecase "Sprache anlegen" as SA
+usecase "Sprache bearbeiten" as SB
+usecase "Anleitung hochladen" as AH
+usecase "Anleitung löschen" as AL
+AL <.. PL : <<include>>
+usecase "Freizugebende Anleitungen anzeigen" as AA
+usecase AF as "Anleitung freigeben
+--
+extension points
+Begründung anfügen"
+usecase "Anleitung zurückweisen" as AR
+usecase "Produktstatus anzeigen" as PS
+usecase "Zurückgewiesene Anleitungen anzeigen" as ZA
+usecase "Produktübersicht anzeigen" as PU
+usecase "Produkt sperren" as SP2
+usecase "Produkt entsperren" as EP
+usecase "Bericht erzeugen" as BE
+left to right direction
+'Include und Extend
+usecase "Sichtbarkeit feststellen" as SF
+SF <.. AA : <<include>>
+SF <.. AF : <<include>>
+SF <.. AR : <<include>>
+SF <.. PS : <<include>>
+SF <.. ZA : <<include>>
+usecase "4 Augen Prinzip prüfen" as 4AP
+4AP <.. AF : <<include>>
+usecase "Begründung angeben" as BA
+BA <.. AR : <<include>>
+AF <.. BA : <<extend>>
+usecase "Begründung anzeigen" as BA2
+BA2 <.. ZA : <<include>>
+usecase "Produktstatus feststellen" as PS2
+PS2 <.. AH : <<include>>
+PS2 <.. AL : <<include>>
+PS2 <.. PL : <<include>>
+'Anmelden wird nicht gezeigt, da es zu unübersichtlich wird! (siehe Anmerkung oben)
+'usecase "Anmelden" as AM
+'AM <.. PA : <<include>>
+'AM <.. PB : <<include>>
+'AM <.. AH : <<include>>
+'AM <.. AA : <<include>>
+'AM <.. AF : <<include>>
+'AM <.. AR : <<include>>
+'AM <.. PS : <<include>>
+'AM <.. ZA : <<include>>
+'AM <.. PU : <<include>>
+'AM <.. SP2 : <<include>>
+'AM <.. EP : <<include>>
+
+'Assoziationen
+PA -- PM
+PB -- PM
+LA -- A
+LB -- A
+SA -- A
+SB -- A
+AH -- UE
+AA -- SP
+AA -- FP
+AF -- SP
+AF -- FP
+AR -- SP
+AR -- FP
+PS -- UE
+ZA -- UE
+PU -- PM
+SP2 -- PM
+EP -- PM
+'AM -- B
+BE -- A
+AL -- A
+PL -- A
+}
+@enduml
