@@ -23,6 +23,7 @@ usecase "Land anlegen" as LA
 usecase "Land bearbeiten" as LB
 usecase "Sprache anlegen" as SA
 usecase "Sprache bearbeiten" as SB
+usecase "Land und Sprache zuordnen" as LS
 usecase "Anleitung hochladen" as AH
 usecase "Anleitung löschen" as AL
 AL <.. PL : <<include>>
@@ -94,5 +95,6 @@ EP -- PM
 BE -- A
 AL -- A
 PL -- A
+LS -- A
 }
 @enduml
