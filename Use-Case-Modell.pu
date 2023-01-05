@@ -64,7 +64,6 @@ AF <.. BA : <<extend>>
 usecase "Begründung anzeigen" as BA2
 BA2 <.. ZA : <<include>>
 usecase "Produktstatus feststellen" as PS2
-PS2 <.. AH : <<include>>
 PS2 <.. AL : <<include>>
 PS2 <.. PL : <<include>>
 usecase "Anleitungsstatus feststellen" as AS

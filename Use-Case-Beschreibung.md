@@ -88,4 +88,29 @@ Ermöglicht das Anzeigen welche Produkte in einer gegebenen Land-Sprach-Kombinat
 ### Kurzbeschreibung
 Ermlöglicht den Übersetzern das Anzeigen von Anleitungen, welche von ihnen verfasst wurden und von einem Prüfer zurückgewiesen wurden. Dabei wird auch die Begründung angezeigt. 
 
+## Produkt sperren
+
+### Kurzbeschreibung
+Ermöglicht das Erstellen einer Produktsperre. Gesperrte Produkte können nicht gelöscht werden und das erneute Hochladen von finalen Anleitungen wird unterbunden. 
+
+## Produkt entsperren
+
+### Kurzbeschreibung
+Ermöglicht das entsperren eines zuvor gesperrten Produktes. Nur derselbe Produkt Manager, der das Produkt gesperrt hat kann es wieder Entsperren.
+
+## Produkt anlegen
+
+### Kurzbeschreibung
+Ermöglicht das einpflegen eines Produktes im System, jedes Produkt hat dabei eine Bezeichnung.
+
+## Produkt bearbeiten
+
+### Kurzbeschreibung
+Ermöglicht das Pflegen aller, auf ein Produkt bezogene Parameter, wie z.B. die Bezeichnung.
+
+## Produktübersicht anzeigen
+
+### Kurzbeschreibung
+Zeigt an für welche Produkte Anleitungen vorliegen und wie der Freigabestatus dieser Anleitungen ist.
+
 
