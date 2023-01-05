@@ -113,4 +113,22 @@ Ermöglicht das Pflegen aller, auf ein Produkt bezogene Parameter, wie z.B. die 
 ### Kurzbeschreibung
 Zeigt an für welche Produkte Anleitungen vorliegen und wie der Freigabestatus dieser Anleitungen ist.
 
+## Freizugebende Anleitungen anzeigen
+> TODO: Ausbauen, da in Konzext zu Prüfern
+### Kurzbeschreibung
+Ermöglicht das Anzeigen von Anleitungen, welche durch den Prüfer noch freigegeben werden müssen. Bei einem Sprachprüfer sind das Anleitungen mit fehlender sprachlicher Freigabe/Zurückweisung, welche in seiner Sprache verfasst sind. Bei einem Fachprüfer sind das Anleitungen mit fehlender fachlicher Freigabe/Zurückweisung, welche zu seinem Produkt gehören.
 
+## Anleitung freigeben
+> TODO: Ausbauen, da in Konzext zu Prüfern
+### Kurzbeschreibung
+Ermöglicht das sprachliche/fachliche Freigeben einer Anleitung. Optional kann hier eine Begründung angefügt werden.
+
+## Anleitung zurückweisen
+> TODO: Ausbauen, da in Konzext zu Prüfern
+### Kurzbeschreibung
+Ermöglicht das sprachliche/fachliche Zurückweisen einer Anleitung. Zwingend muss hier eine Begründung angefügt werden.
+
+## Begründung angeben
+> TODO: Ausbauen, da in Konzext zu Prüfern
+### Kurzbeschreibung
+Ermöglicht das formulieren einer Begründung für eine Zurückweisung oder Freigabe.
