@@ -14,23 +14,31 @@ B <|-- UE
 B <|-- SP
 B <|-- FP
 
+'TODO: Begrüdungen für Extends anfügen!!!
 package ManualMaster {
 'Use Cases
 usecase "Produkt anlegen" as PA
 usecase "Produkt bearbeiten" as PB
-usecase "Produkt löschen" as PL
+usecase PL as "Produkt löschen
+--
+Extension points
+Anleitungen löschen"
 usecase "Land anlegen" as LA
 usecase "Land bearbeiten" as LB
 usecase "Sprache anlegen" as SA
 usecase "Sprache bearbeiten" as SB
 usecase "Land und Sprache zuordnen" as LS
-usecase "Anleitung hochladen" as AH
+usecase AH as "Anleitung hochladen
+--
+Extension points
+Alte Anleitung löschen"
 usecase "Anleitung löschen" as AL
-AL <.. PL : <<include>>
+PL <.. AL : <<extend>>
+AH <.. AL : <<extend>>
 usecase "Freizugebende Anleitungen anzeigen" as AA
 usecase AF as "Anleitung freigeben
 --
-extension points
+Extension points
 Begründung anfügen"
 usecase "Anleitung zurückweisen" as AR
 usecase "Produktstatus anzeigen" as PS
@@ -58,6 +66,8 @@ usecase "Produktstatus feststellen" as PS2
 PS2 <.. AH : <<include>>
 PS2 <.. AL : <<include>>
 PS2 <.. PL : <<include>>
+usecase "Anleitungsstatus feststellen" as AS
+AS <.. AL : <<include>>
 'Anmelden wird nicht gezeigt, da es zu unübersichtlich wird! (siehe Anmerkung oben)
 'usecase "Anmelden" as AM
 'AM <.. PA : <<include>>
