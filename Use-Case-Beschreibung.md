@@ -54,4 +54,38 @@ Ermöglicht das Löschen einer Anleitung aus dem System. Hierbei werden auch die
 ### Kurzbeschreibung
 Ermöglicht das Löschen eines Produktes aus dem System. Hierbei werden alle Anleitungen des Produktes mitgelöscht (falls welche vorhanden sind). Produkte können nur gelöscht werden, wenn diese nicht gesperrt sind.
 
+## Anleitung hochladen
+
+### Kurzbeschreibung
+Ermöglicht das Hochladen einer Anleitung für ein bestimmtes (nicht gesperrtes) Produkt in einer bestimmten Land-Sprach-Kombination. Sollte bereits eine Anleitung hochgeladen worden sein, wird die alte Anleitung mit ihren Freigaben und Zurückweisungen gelöscht. Anleitungen dürfen nur von übersetztern in derseleben Land-Sprach-Kombination hochgeladen werden.
+
+## 4 Augen Prinzip prüfen
+> TODO: Ausbauen, da in Konzext zu Prüfern
+### Kurzbeschreibung
+Dieser Use-Case prüft, ob beim freigeben eines Produktes das 4 Augen Prizip gewart wird, also das eine Freigabe nicht vom Uploader erteilt wird.
+
+Dieser Use-Case erfüllt eine unterstüzende Funktion für andere Use-Cases, um zu entscheiden, ob eine bestimmte Transaktion genemigt werden darf.
+
+## Sichtbarkeit feststellen
+> TODO: Ausbauen, da in Konzext zu Prüfern
+### Kurzbeschreibung
+Dieser Use-Case soll sicherstellen, dass Benutzer nur auf Systemobjekte (Anleitungen, Produkte), für welche sie zuvor implizit freigegeben wurden. Diese hängt unter anderem von zugewiesenem Land, Sprache und Produkt ab.
+
+Dieser Use-Case erfüllt eine unterstüzende Funktion für andere Use-Cases, um zu entscheiden, welche Transaktionen und Anfragen genemigt werden dürfen.
+
+## Begründung anzeigen
+
+### Kurzbeschreibung
+Dieser Usecase zeigt dem Benutzer die Begründungen für eine Freigabe oder Zurückweisung an, falls eine vorhanden ist.
+
+## Produktstatus Anzeigen
+
+### Kurzbeschreibung
+Ermöglicht das Anzeigen welche Produkte in einer gegebenen Land-Sprach-Kombination über eine Anleitungsübersetzung verfügen und wie diese fehlt.
+
+## Zurückgewiesene Anleitungen anzeigen
+
+### Kurzbeschreibung
+Ermlöglicht den Übersetzern das Anzeigen von Anleitungen, welche von ihnen verfasst wurden und von einem Prüfer zurückgewiesen wurden. Dabei wird auch die Begründung angezeigt. 
+
 
