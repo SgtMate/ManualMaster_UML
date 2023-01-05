@@ -114,21 +114,69 @@ Ermöglicht das Pflegen aller, auf ein Produkt bezogene Parameter, wie z.B. die 
 Zeigt an für welche Produkte Anleitungen vorliegen und wie der Freigabestatus dieser Anleitungen ist.
 
 ## Freizugebende Anleitungen anzeigen
-> TODO: Ausbauen, da in Konzext zu Prüfern
+- Fachliches Ziel: ?
+- Akteure: Fachprüfer, Sachprüfer
+- Vorbedingung: /
+- Nachbedingung: ?
+- Verwendete Informationen: Sprachprüfer.Sprache ODER Fachprüfer.Produkt, Anleitung.Sprache, Produkt.Anleitung, Anleitung.sprachlicheFreigabe, Anleitung.technischeFreigabe
+- Ergebnis: Alle Anleitungen, welche der Prüfer prüfen darf werden angezeigt
+- Verbindungen: 4 Augen Prinzip Prüfen, Sichtbarkeit feststellen
+
+### Ablauf
+Ist der Prüfer ein Fachprüfer, wird sein zu Prüfendes Produkt ermittelt. Dann werden alle Anleitungen für dieses Produkt ermittelt und die Anleitungen ausgewählt, welche noch kein Ergebnis einer Fachprüfung haben (also kein Freigabe- oder Zurückweisungsobjekt hinterlegt wurde). Dann werden alle Anleitungen wo, dies der Fall ist dem Fachprüfer präsentiert.
+
+Ist der Prüfer ein Sprachprüfer, werden alle Produkte nach Anleitungen in der Sprache des Prüfers durchsucht. Dann werden daraus alle Anleitungen ermittelt, welche noch kein Ergebnis einer Sprachprüfung haben (also kein Freigabe- oder Zurückweisungsobjekt hinterlegt wurde). Dann werden alle Anleitungen wo, dies der Fall ist dem Sprachprüfer präsentiert.
+
+In beiden Fällen gilt, sollten keine Anleitungen vorhanden sein werden auch keine Angezeigt. Stattdessen wird ein Hinweis anzgezeigt, dass es nichts zu Prüfen gibt. 
+
 ### Kurzbeschreibung
 Ermöglicht das Anzeigen von Anleitungen, welche durch den Prüfer noch freigegeben werden müssen. Bei einem Sprachprüfer sind das Anleitungen mit fehlender sprachlicher Freigabe/Zurückweisung, welche in seiner Sprache verfasst sind. Bei einem Fachprüfer sind das Anleitungen mit fehlender fachlicher Freigabe/Zurückweisung, welche zu seinem Produkt gehören.
 
 ## Anleitung freigeben
-> TODO: Ausbauen, da in Konzext zu Prüfern
+- Fachliches Ziel: ?
+- Akteure: Fachprüfer, Sachrüfer
+- Vorbedingung: Eine Anleitung wurde von einem Übersetzer Hochgeladen; Die Anleitung ist in der Sprache des Sprachprüfers verfasst oder die Anleitung ist für das Produkt des Fachprüfers verfasst; Die Anleitung darf noch nicht unter derselben Kategorie (Sprache oder Fachlich) geprüft worden sein
+- Nachbedingung: ?
+- Verwendete Informationen: Anleitung.Sprache, Produkt.Anleitung, Begründung (Optional), Sprachprüfer.Sprache ODER Fachprüfer.Produkt
+- Ergebnis: Die Anleitung hat eine neue Freigabe
+- Verbindungen: Begründung Angeben (Optional, wenn der Prüfer eine Begründung angeben will), Sichtbarkeit feststellen
+
+### Ablauf
+Der Sprach oder Fachprüfer gibt eine Anleitung an, die er Freigeben will, außerdem kann er eine Begründung angeben. Mit dem Verweis auf die Anleitung und den Prüfer wird "Sichtbarkeit Prüfen" ausgeführt. Ist der Prüfer nicht berechtigt, diese Anleitung zu Prüfen wird ein Fehler geworfen und der Vorgang abgebrochen. Ist der Prüfer aber berechtigt eine Bewertung vorzunehmen, wird ein Freigabeobjekt mit generiert, welches entweder die Begründung oder den Wert "null" enthällt und ein Verweis in dem Anleitungsobjekt hinterlegt. Ob hier die Fachliche oder Sprachliche Freigabe angehängt wird, hängt von der Rolle des Prüfers ab. 
+
+Sollte die angegebene Anleitung nicht mehr existieren wird ein Fehler geworfen und keine Änderung vorgenommen. Sollte die Anleitung bereits in dieser Kategroie (Fachlich/Sprachlich) Geprüft worden sein wird ebenfalls ein Fehler geworfen.
+
 ### Kurzbeschreibung
 Ermöglicht das sprachliche/fachliche Freigeben einer Anleitung. Optional kann hier eine Begründung angefügt werden.
 
 ## Anleitung zurückweisen
-> TODO: Ausbauen, da in Konzext zu Prüfern
+- Fachliches Ziel: ?
+- Akteure: Fachprüfer, Sachrüfer
+- Vorbedingung: Eine Anleitung wurde von einem Übersetzer Hochgeladen; Die Anleitung ist in der Sprache des Sprachprüfers verfasst oder die Anleitung ist für das Produkt des Fachprüfers verfasst; Die Anleitung darf noch nicht unter derselben Kategorie (Sprache oder Fachlich) geprüft worden sein
+- Nachbedingung: ?
+- Verwendete Informationen: Anleitung.Sprache, Produkt.Anleitung, Begründung, Sprachprüfer.Sprache ODER Fachprüfer.Produkt
+- Ergebnis: Die Anleitung hat eine neue Zurückweisung
+- Verbindungen: Begründung Angeben, Sichtbarkeit feststellen
+
+### Ablauf
+Der Sprach oder Fachprüfer gibt eine Anleitung an, die er Zurückweisen will, außerdem gibt er eine Begründung an. Mit dem Verweis auf die Anleitung und den Prüfer wird "Sichtbarkeit Prüfen" ausgeführt. Ist der Prüfer nicht berechtigt, diese Anleitung zu Prüfen wird ein Fehler geworfen und der Vorgang abgebrochen. Ist der Prüfer aber berechtigt eine Bewertung vorzunehmen, wird ein Zurückweisungsobjekt mit der Begründung generiert und ein Verweis in dem Anleitungsobjekt hinterlegt. Ob hier die Fachliche oder Sprachliche Zurückweisung angehängt wird, hängt von der Rolle des Prüfers ab. 
+
+Sollte die angegebene Anleitung nicht mehr existieren oder sollte keine Begründung angegeben worden sein, wird ein Fehler geworfen und keine Änderung vorgenommen. Sollte die Anleitung bereits in dieser Kategroie (Fachlich/Sprachlich) Geprüft worden sein wird ebenfalls ein Fehler geworfen.
+
 ### Kurzbeschreibung
 Ermöglicht das sprachliche/fachliche Zurückweisen einer Anleitung. Zwingend muss hier eine Begründung angefügt werden.
 
 ## Begründung angeben
-> TODO: Ausbauen, da in Konzext zu Prüfern
+- Fachliches Ziel: ?
+- Akteure: /
+- Vorbedingung: /
+- Nachbedingung: ?
+- Verwendete Informationen: Zeichenkette
+- Ergebnis: Es wurde ein Begründungsstring erzeugt.
+- Verbindung: Anleitung freigeben, Anleitung zurückweisen
+
+### Ablauf
+Die Eingaben des Prüfers werden entegegengenommen und in einen String geschreiben, welcher zurückgegeben wird. Sollten keine Eingabe stattfinden wird ein Fehler geworfen.
+
 ### Kurzbeschreibung
 Ermöglicht das formulieren einer Begründung für eine Zurückweisung oder Freigabe.
