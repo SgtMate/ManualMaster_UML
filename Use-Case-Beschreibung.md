@@ -60,16 +60,43 @@ Ermöglicht das Löschen eines Produktes aus dem System. Hierbei werden alle Anl
 Ermöglicht das Hochladen einer Anleitung für ein bestimmtes (nicht gesperrtes) Produkt in einer bestimmten Land-Sprach-Kombination. Sollte bereits eine Anleitung hochgeladen worden sein, wird die alte Anleitung mit ihren Freigaben und Zurückweisungen gelöscht. Anleitungen dürfen nur von übersetztern in derseleben Land-Sprach-Kombination hochgeladen werden.
 
 ## 4 Augen Prinzip prüfen
-> TODO: Ausbauen, da in Konzext zu Prüfern
+- Fachliches Ziel: ?
+- Auslöser: Aufruf durch ein anderen Use-Case
+- Akteure: /
+- Vorbedingung: /
+- Nachbedingung: ?
+- Verwendete Informationen: Anleitung.Ersteller, Benutzer
+- Ergebnis: Verhindert, das der Ersteller einer Anleitung, mit dem angegebenen Benutzer identisch ist.
+- Verbindungen: Anleitung freigeben
+
+### Ablauf
+Der Use-Case bekommt eine Anleitung und einen Benutzer, er überprüft ob der Ersteller der Anleitung mit dem angegebenen Benutzer Identisch ist. Ist dies der Fall, wird "false" zurückgegeben, falls nicht wird "true" zurückgegeben.
+
 ### Kurzbeschreibung
 Dieser Use-Case prüft, ob beim freigeben eines Produktes das 4 Augen Prizip gewart wird, also das eine Freigabe nicht vom Uploader erteilt wird.
 
 Dieser Use-Case erfüllt eine unterstüzende Funktion für andere Use-Cases, um zu entscheiden, ob eine bestimmte Transaktion genemigt werden darf.
 
 ## Sichtbarkeit feststellen
-> TODO: Ausbauen, da in Konzext zu Prüfern
+- Fachliches Ziel: ?
+- Auslöser: Aufruf durch ein anderen Use-Case
+- Vorbedinung: /
+- Nachbedingung: ?
+- Verwendete Informationen: Fachprüfer.Produkt ODER Sprachprüfer.Sprache ODER Übersetzer.Sprach_Land_Kombination, Anleitung.Sprach_Land_Kombination, Anleitung.Sprach_Land_Kombination.Sprache, Produkt.Anleitung
+- Ergebnis: Akteure erhalten nur Zugriff auf Anleitungen, für die sie eine Berechtigung haben.
+- Verbindungen: Anleitung Zurückweisen, Freizugebende Anleitungen anzeigen, Produktstatus anzeigen, Anleitung hochladen, Anleitung freigeben
+
+### Ablauf
+Der Use-Case bekommt eine Rolle und eine Anleitung gegeben und Überprüft ob die Rolle Zugriff auf die Anleitung hat.
+
+Ist die Rolle ein Übersetzer, wird die Sprach-Land-Kombination des Übersetzers mit der der Anleitung verglichen. Ist diese identisch wird der Zugriff gewärt. Ist diese nicht identisch wird der Zugriff verweigert. 
+
+Ist die Rolle ein Fachprüfer, wird das Produkt des Fachprüfers mit dem Produkt, dem die Anleitung zugewiesen ist verglichen. Ist dieses identisch wird der Zugriff gewärt. Ist dieses nicht identisch wird der Zugriff verweigert. 
+
+Ist die Rolle ein Sprachprüfer, wird die Sprache des Sprachprüfers mit der Sprache der Anleitung verglichen. Ist diese identisch wird der Zugriff gewärt. Ist diese nicht identisch wird der Zugriff verweigert. 
+
 ### Kurzbeschreibung
-Dieser Use-Case soll sicherstellen, dass Benutzer nur auf Systemobjekte (Anleitungen, Produkte), für welche sie zuvor implizit freigegeben wurden. Diese hängt unter anderem von zugewiesenem Land, Sprache und Produkt ab.
+Dieser Use-Case soll sicherstellen, dass Benutzer nur auf Anleitungen zufreifen können, für welche sie zuvor implizit freigegeben wurden. Diese hängt unter anderem von zugewiesenem Land, Sprache und Produkt ab.
 
 Dieser Use-Case erfüllt eine unterstüzende Funktion für andere Use-Cases, um zu entscheiden, welche Transaktionen und Anfragen genemigt werden dürfen.
 
@@ -115,10 +142,11 @@ Zeigt an für welche Produkte Anleitungen vorliegen und wie der Freigabestatus d
 
 ## Freizugebende Anleitungen anzeigen
 - Fachliches Ziel: ?
+- Auslöser: Aufruf durch einen Prüfer
 - Akteure: Fachprüfer, Sachprüfer
 - Vorbedingung: /
 - Nachbedingung: ?
-- Verwendete Informationen: Sprachprüfer.Sprache ODER Fachprüfer.Produkt, Anleitung.Sprache, Produkt.Anleitung, Anleitung.sprachlicheFreigabe, Anleitung.technischeFreigabe
+- Verwendete Informationen: Sprachprüfer.Sprache ODER Fachprüfer.Produkt, Anleitung.Sprach_Land_Kombination.Sprache, Produkt.Anleitung, Anleitung.sprachlicheFreigabe, Anleitung.technischeFreigabe
 - Ergebnis: Alle Anleitungen, welche der Prüfer prüfen darf werden angezeigt
 - Verbindungen: 4 Augen Prinzip Prüfen, Sichtbarkeit feststellen
 
@@ -134,10 +162,11 @@ Ermöglicht das Anzeigen von Anleitungen, welche durch den Prüfer noch freigege
 
 ## Anleitung freigeben
 - Fachliches Ziel: ?
+- Auslöser: Prüfer gibt eine Anleitung frei.
 - Akteure: Fachprüfer, Sachrüfer
 - Vorbedingung: Eine Anleitung wurde von einem Übersetzer Hochgeladen; Die Anleitung ist in der Sprache des Sprachprüfers verfasst oder die Anleitung ist für das Produkt des Fachprüfers verfasst; Die Anleitung darf noch nicht unter derselben Kategorie (Sprache oder Fachlich) geprüft worden sein
 - Nachbedingung: ?
-- Verwendete Informationen: Anleitung.Sprache, Produkt.Anleitung, Begründung (Optional), Sprachprüfer.Sprache ODER Fachprüfer.Produkt
+- Verwendete Informationen: Anleitung.Sprach_Land_Kombination.Sprache, Produkt.Anleitung, Begründung (Optional), Sprachprüfer.Sprache ODER Fachprüfer.Produkt
 - Ergebnis: Die Anleitung hat eine neue Freigabe
 - Verbindungen: Begründung Angeben (Optional, wenn der Prüfer eine Begründung angeben will), Sichtbarkeit feststellen
 
@@ -151,10 +180,11 @@ Ermöglicht das sprachliche/fachliche Freigeben einer Anleitung. Optional kann h
 
 ## Anleitung zurückweisen
 - Fachliches Ziel: ?
+- Auslöser: Prüfer weist eine Anleitung zurück.
 - Akteure: Fachprüfer, Sachrüfer
 - Vorbedingung: Eine Anleitung wurde von einem Übersetzer Hochgeladen; Die Anleitung ist in der Sprache des Sprachprüfers verfasst oder die Anleitung ist für das Produkt des Fachprüfers verfasst; Die Anleitung darf noch nicht unter derselben Kategorie (Sprache oder Fachlich) geprüft worden sein
 - Nachbedingung: ?
-- Verwendete Informationen: Anleitung.Sprache, Produkt.Anleitung, Begründung, Sprachprüfer.Sprache ODER Fachprüfer.Produkt
+- Verwendete Informationen: Anleitung.Sprach_Land_Kombination.Sprache, Produkt.Anleitung, Begründung, Sprachprüfer.Sprache ODER Fachprüfer.Produkt
 - Ergebnis: Die Anleitung hat eine neue Zurückweisung
 - Verbindungen: Begründung Angeben, Sichtbarkeit feststellen
 
@@ -168,6 +198,7 @@ Ermöglicht das sprachliche/fachliche Zurückweisen einer Anleitung. Zwingend mu
 
 ## Begründung angeben
 - Fachliches Ziel: ?
+- Auslöser: Aufruf durch ein anderen Use-Case
 - Akteure: /
 - Vorbedingung: /
 - Nachbedingung: ?
