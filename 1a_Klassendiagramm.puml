@@ -1,0 +1,98 @@
+@startuml 1a
+
+class Produkt{
+    + name: String
+    + gesperrt: Boolean
+}
+Produkt "1" -- "*" Anleitung
+Produkt "*" -- "*" Land : wird vertrieben in >
+
+class Land{
+    + Bezeichnung: String
+}
+class Sprache{
+    + Bezeichung: String
+}
+Land "1..*" -- "1..*" Sprache
+
+class Freigabe{
+    + begrüngung : String{Optional}
+}
+class Zurückweisung{
+    + begründung : String
+}
+Freigabe <|-- FachlicheFreigabe
+Freigabe <|-- SprachlicheFreigabe
+Zurückweisung <|-- FachlicheZurückweisung
+Zurückweisung <|-- SprachlicheZurückweisung
+FachlicheAntwort <|-- FachlicheZurückweisung
+FachlicheAntwort <|-- FachlicheFreigabe
+SprachlicheAntwort <|-- SprachlicheZurückweisung
+SprachlicheAntwort <|-- SprachlicheFreigabe
+'' Anleitungen pflegen, wenn das Produkt dort vertrieben wird
+'' Finale anleitungen erneut hochladen
+class Anleitung{
+    + land: Land
+    + sprache: Sprache
+    + final: Boolean
+}
+note right: das ist nicht so schön\nFachliche und Sprachliche Antwort\nsind schlecht so
+Anleitung "1" - "1" FachlicheAntwort
+Anleitung "1" -- "1" SprachlicheAntwort
+
+
+class Rolle
+class ProduktManager{
+    + produktAnlegen() : Produkt
+    + produktBearbeiten(produkt : Produkt)
+    + produktSperren(produkt : Produkt) 
+    '' Nur Produktmanager, der die Sperre veranlasst hat, kann diese wieder aufheben
+    + produktSperreAufheben(produkt : Produkt)
+    + fehlendeÜbersetzungenAnzeigen()
+    + freigabestatusAnzeigen()
+}
+class Administrator{
+    + spracheAnlegen()
+    + landAnlegen()
+    + landSpracheZuordnen(land : Land, sprache : Sprache)
+    '' TODO
+    + benutzerPflegen()
+    + berichtErzeugen()
+    + übersetzungLöschen(übersetzung : Anleitung)
+    + produktLöschen(produkt : Produkt)
+}
+
+'' Land Sprach Kombination für übersetzre
+class Übersetzer{
+    + fehlendeÜbersetzungenAnzeigen()
+    + vorhandeneÜbersetzungenAnzeigen()
+    + zurückgewieseneÜbersetzungenAnzeigen()
+    + anleitungHochladen(anleitung : Anleitung)
+}
+note bottom: kümmert sich um mehrere Land/Sprachen kombis
+(Land, Sprache) - Übersetzer : many -- many
+interface Prüfer{
+    + freizugebendeAnleitungenAnzeigen()
+    + anleitungFreigeben(anleitung : Anleitung, begründung : String{Optinal})
+    + anleitungZurückweisen(anleitung : Anleitung, begründung: String)
+}
+class Sprachprüfer
+Prüfer --|> Sprachprüfer
+Sprachprüfer "*" -- "1" Sprache : Prüft >
+class Fachprüfer
+Prüfer --|> Fachprüfer
+Fachprüfer "*" -- "1" Produkt : Prüft >
+
+Rolle <|-- ProduktManager
+Rolle <|-- Administrator
+Rolle <|-- Übersetzer
+Rolle <|-- Prüfer
+
+class Benutzer{
+    + benutzername : String
+    + anmelden()
+}
+Benutzer "*" - "1..*" Rolle : hat >
+
+
+@enduml

@@ -1,0 +1,7 @@
+@startuml 1b
+
+object "adam:Benutzer" as b1{
+
+}
+
+@enduml
