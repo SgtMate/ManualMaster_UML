@@ -1,7 +1,63 @@
 @startuml 1b
 
-object "adam:Benutzer" as b1{
+note "verbundene Objekte gehören eigentlich\n(sofern möglich) ineinander geschachtelt" as n1
 
+object "Alfred:Benutzer" as b1{
+    benutzername = "alfred"
+    rolle
 }
+object "rolle:Administrator" as r1
+b1::rolle - r1
+
+
+object "Ulrich:Benutzer" as b2{
+    benutzername = "ulrich"
+    rolle
+}
+object "rolle:Übersetzer" as ü2
+b2::rolle - ü2
+
+object "Uwe:Benutzer" as b3{
+    benutzername = "uwe"
+    rolle
+}
+object "rolle:Übersetzer" as ü3
+b3::rolle - ü3
+
+object "Udo:Benutzer" as b4{
+    benutzername = "udo"
+    rolle
+}
+object "rolle:Übersetzer" as ü4
+b4::rolle - ü4
+
+object "Urs:Benutzer" as b5{
+    benutzername = "urs"
+    rolle
+}
+object "rolle:Übersetzer" as ü5
+b5::rolle - ü5
+
+object "Siggi:Benutzer" as b6{
+    benutzername = "siggi"
+    rolle
+}
+object "rolle:Sprachprüfer" as s6
+b6::rolle - s6
+
+object "Ferdinand:Benutzer" as b7{
+    benutzername = "ferdinand"
+    rolle
+}
+object "rolle:Fachprüfer" as f7
+b7::rolle - f7
+
+object "Peter:Benutzer" as b8{
+    benutzername = "peter"
+    rolle
+}
+object "rolle:ProduktManager" as p8
+b8::rolle - p8
+
 
 @enduml
