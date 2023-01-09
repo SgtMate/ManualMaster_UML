@@ -1,5 +1,9 @@
 @startuml 1b
 
+note "KORREKTE UML SYNTAX BEIM ABZEICHNEN BEACHTEN!!!" as n2
+
+'' Paragraph 1
+
 note "verbundene Objekte gehören eigentlich\n(sofern möglich) ineinander geschachtelt" as n1
 
 object "Alfred:Benutzer" as b1{
@@ -59,5 +63,19 @@ object "Peter:Benutzer" as b8{
 object "rolle:ProduktManager" as p8
 b8::rolle - p8
 
+'' Paragraph 2
+
+object "Deutschland:Land" as l1{
+    bezeichnung = "DE"
+}
+object "Schweiz:Land" as l2{
+    bezeichnung = "CH"
+}
+object "Frankreich:Land" as l3{
+    bezeichnung = "FR"
+}
+object "Luxemburg:Land" as l4{
+    bezeichnung = "LU"
+}
 
 @enduml

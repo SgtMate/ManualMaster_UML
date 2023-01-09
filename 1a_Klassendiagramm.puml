@@ -8,10 +8,10 @@ Produkt "1" -- "*" Anleitung
 Produkt "*" -- "*" Land : wird vertrieben in >
 
 class Land{
-    + Bezeichnung: String
+    + bezeichnung: String
 }
 class Sprache{
-    + Bezeichung: String
+    + bezeichung: String
 }
 Land "1..*" -- "1..*" Sprache
 
