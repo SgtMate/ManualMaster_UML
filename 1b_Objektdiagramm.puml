@@ -21,26 +21,26 @@ object "Ulrich:Benutzer" as b2{
 object "rolle:Übersetzer" as ü2
 b2::rolle - ü2
 
-object "Uwe:Benutzer" as b3{
-    benutzername = "uwe"
-    rolle
-}
-object "rolle:Übersetzer" as ü3
-b3::rolle - ü3
+'object "Uwe:Benutzer" as b3{
+'    benutzername = "uwe"
+'    rolle
+'}
+'object "rolle:Übersetzer" as ü3
+'b3::rolle - ü3
 
-object "Udo:Benutzer" as b4{
-    benutzername = "udo"
-    rolle
-}
-object "rolle:Übersetzer" as ü4
-b4::rolle - ü4
+'object "Udo:Benutzer" as b4{
+'    benutzername = "udo"
+'    rolle
+'}
+'object "rolle:Übersetzer" as ü4
+'b4::rolle - ü4
 
-object "Urs:Benutzer" as b5{
-    benutzername = "urs"
-    rolle
-}
-object "rolle:Übersetzer" as ü5
-b5::rolle - ü5
+'object "Urs:Benutzer" as b5{
+'    benutzername = "urs"
+'    rolle
+'}
+'object "rolle:Übersetzer" as ü5
+'b5::rolle - ü5
 
 object "Siggi:Benutzer" as b6{
     benutzername = "siggi"
@@ -71,9 +71,9 @@ object "Deutschland:Land" as DE{
 object "Schweiz:Land" as CH{
     bezeichnung = "CH"
 }
-object "Frankreich:Land" as FR{
-    bezeichnung = "FR"
-}
+'object "Frankreich:Land" as FR{
+'    bezeichnung = "FR"
+'}
 object "Luxemburg:Land" as LU{
     bezeichnung = "LU"
 }
@@ -83,35 +83,35 @@ object "Luxemburg:Land" as LU{
 object "Deutsch:Sprache" as de{
     bezeichnung = "de"
 }
-object "Französisch:Sprache" as fr{
-    bezeichnung = "fr"
-}
-object "Italienisch:Sprache" as it{
-    bezeichnung = "it"
-}
-object "Luxemburgisch:Sprache" as lb{
-    bezeichnung = "lu"
-}
+'object "Französisch:Sprache" as fr{
+'    bezeichnung = "fr"
+'}
+'object "Italienisch:Sprache" as it{
+'    bezeichnung = "it"
+'}
+'object "Luxemburgisch:Sprache" as lb{
+'    bezeichnung = "lu"
+'}
 
 '' P4
 
 DE -- de
-CH -- fr
-CH -- it
-CH -- de
-LU -- fr
+'CH -- fr
+'CH -- it
+'CH -- de
+'LU -- fr
 LU -- de
-LU -- lb
-FR -- fr
+'LU -- lb
+'FR -- fr
 
 ü2 - (DE,de)
-ü3 -- (CH,fr)
-ü4 - (CH,it)
-ü2 -- (CH,de)
-ü3 - (LU,fr)
+'ü3 -- (CH,fr)
+'ü4 - (CH,it)
+'ü2 -- (CH,de)
+'ü3 - (LU,fr)
 ü2 -- (LU,de)
-ü5 - (LU,lb)
-ü3 -- (FR,fr)
+'ü5 - (LU,lb)
+'ü3 -- (FR,fr)
 
 '' P5
 
@@ -124,7 +124,6 @@ st -- CH
 st -- LU
 
 '' P6
-'' TODO von Ulrich
 object "SmartToasterLUde:Anleitung" as stLUde{
     final = false
 }
@@ -138,20 +137,19 @@ stDEde -- de
 stDEde -- DE
 
 '' P7
-'' TODO von Uwe
-
-object "SmartToasterLUfr:Anleitung" as stLUfr{
-    final = false
-}
-stLUfr -- fr
-stLUfr -- LU
-
-object "SmartToasterCHfr:Anleitung" as stCHfr{
-    final = false
-}
-stCHfr -- fr
-stCHfr -- CH
-
+'
+'object "SmartToasterLUfr:Anleitung" as stLUfr{
+'    final = false
+'}
+'stLUfr -- fr
+'stLUfr -- LU
+'
+'object "SmartToasterCHfr:Anleitung" as stCHfr{
+'    final = false
+'}
+'stCHfr -- fr
+'stCHfr -- CH
+'
 '' P8
 '' P9
 
@@ -171,11 +169,10 @@ object ":FachlicheZurückweisung" as unvoll{
 stLUde -- unvoll
 
 ''P12
-object ":FachlicheFreigabe" as fachFrei
-stLUfr -- fachFrei
-
+'object ":FachlicheFreigabe" as fachFrei
+'stLUfr -- fachFrei
+'
 '''
-
 
 
 @enduml
