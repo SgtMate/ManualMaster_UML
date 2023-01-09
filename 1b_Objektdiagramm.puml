@@ -65,17 +65,52 @@ b8::rolle - p8
 
 '' Paragraph 2
 
-object "Deutschland:Land" as l1{
+object "Deutschland:Land" as DE{
     bezeichnung = "DE"
 }
-object "Schweiz:Land" as l2{
+object "Schweiz:Land" as CH{
     bezeichnung = "CH"
 }
-object "Frankreich:Land" as l3{
+object "Frankreich:Land" as FR{
     bezeichnung = "FR"
 }
-object "Luxemburg:Land" as l4{
+object "Luxemburg:Land" as LU{
     bezeichnung = "LU"
 }
+
+'' Paragraph 3
+
+object "Deutsch:Sprache" as de{
+    bezeichnung = "de"
+}
+object "Französisch:Sprache" as fr{
+    bezeichnung = "fr"
+}
+object "Italienisch:Sprache" as it{
+    bezeichnung = "it"
+}
+object "Luxemburgisch:Sprache" as lb{
+    bezeichnung = "lu"
+}
+
+DE -- de
+CH -- fr
+CH -- it
+CH -- de
+LU -- fr
+LU -- de
+LU -- lb
+FR -- fr
+
+ü2 - (DE,de)
+ü3 -- (CH,fr)
+ü4 - (CH,it)
+ü2 -- (CH,de)
+ü3 - (LU,fr)
+ü2 -- (LU,de)
+ü5 - (LU,lb)
+ü3 -- (FR,fr)
+
+
 
 @enduml
