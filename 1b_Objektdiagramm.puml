@@ -93,6 +93,8 @@ object "Luxemburgisch:Sprache" as lb{
     bezeichnung = "lu"
 }
 
+'' P4
+
 DE -- de
 CH -- fr
 CH -- it
@@ -110,6 +112,69 @@ FR -- fr
 ü2 -- (LU,de)
 ü5 - (LU,lb)
 ü3 -- (FR,fr)
+
+'' P5
+
+object "SmartToaster:Produkt" as st{
+    name = "Smart Toaster"
+    gesperrt = false
+}
+st -- DE
+st -- CH
+st -- LU
+
+'' P6
+'' TODO von Ulrich
+object "SmartToasterLUde:Anleitung" as stLUde{
+    final = false
+}
+stLUde -- de
+stLUde -- LU
+
+object "SmartToasterDEde:Anleitung" as stDEde{
+    final = false
+}
+stDEde -- de
+stDEde -- DE
+
+'' P7
+'' TODO von Uwe
+
+object "SmartToasterLUfr:Anleitung" as stLUfr{
+    final = false
+}
+stLUfr -- fr
+stLUfr -- LU
+
+object "SmartToasterCHfr:Anleitung" as stCHfr{
+    final = false
+}
+stCHfr -- fr
+stCHfr -- CH
+
+'' P8
+'' P9
+
+object ":SprachlicheFreigabe" as spfrei
+stDEde -- spfrei
+
+'' P10
+object ":SprachlicheZurückweisung" as grammar{
+    begründung = "Grammatik fehlerhat"
+}
+stLUde -- grammar
+
+''P11
+object ":FachlicheZurückweisung" as unvoll{
+    begründung = "Fehlerbehebungsbeschreibungen unvollständig"
+}
+stLUde -- unvoll
+
+''P12
+object ":FachlicheFreigabe" as fachFrei
+stLUfr -- fachFrei
+
+'''
 
 
 
