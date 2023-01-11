@@ -107,50 +107,83 @@ Kombination hochladen
 # Sprachprüfer
 
 ## freizugebendeAnleitungenAnzeigen
-<!--TODO-->
-Sprachprüfer können sich Anleitungen in der ihnen zugeordneten Sprache Anzeigen lassen, die noch zu prüfen sind.
 ### Kurzbeschreibung
+Sprachprüfer können sich Anleitungen in der ihnen zugeordneten Sprache Anzeigen lassen, die noch zu prüfen sind.
 ### Fachliches Ziel
+Anleitungen Anzeigen
 ### Akteure
+ein Sprachprüfer
 ### Auslöser
+Aufruf durch einen Sprachprüfer
 ### Vorbedingungen
+keine
 ### Nachbedingungen
+keine
 ### verwendete Informationen
+* Alle Anleitungen
+* Freigabestati der Anleitungen
+* Sprache der Anleitungen
 ### Ablauf
+Es werden alle Anleitungen gesucht die noch keinen
+Freigabestatus haben, dann werden diese nach der Sprache des Sprachprüfers gefiltert.
+Zuletzt werden die passenden Anleitungen angezeigt
 ### Abläufe in Ausnahmefällen
+keine Angabe
 ### verbundene Anwendungsfälle
+keine
 
 ## anleitungFreigeben
-<!--TODO-->
+
 ### Kurzbeschreibung
 Sprachprüfer können Anleitungen eine sprachliche Freigabe erteilen.
 Wichtig ist dabei, dass Benutzer niemals eine Freigabe für Anleitungen erteilen, die sie selbst hochgeladen haben
 ### Fachliches Ziel
+einer Anleitung den Status sprachtlich Freigegeben zuteilen
 ### Akteure
+Sprachprüfer
 ### Auslöser
+Aufruf der sprachlichen Freigabe durch einen Sprachprüfer 
 ### Vorbedingungen
+* Anleitung muss vorhanden sein
+* Sprachprüfer muss Sprache der Anleitung zugeordnet sein.
+* die Anleitung darf keine fachliche Zurückweisung haben
+* die Anleitung darf nicht schon sprachlich freigegeben sein
 ### Nachbedingungen
+keine
 ### verwendete Informationen
+die freizugebene Anleitung
 ### Ablauf
+es wird der Status SprachlicheFreigabe erstellt und der Anleitung hinzugefügt
 ### Abläufe in Ausnahmefällen
+keine Angabe
 ### verbundene Anwendungsfälle
-
+keine
 
 
 ## anleitungZurückweisen
-<!--TODO-->
+
 ### Kurzbeschreibung
 Sprachprüfer können Anleitungen eine sprachliche Zurückweisung erteilen.
 ### Fachliches Ziel
+einer Anleitung den Status sprachlich Zurückgewiesen zuteilen
 ### Akteure
+Sprachprüfer
 ### Auslöser
+Aufruf der sprachlichen Zurückweisung durch einen Sprachprüfer
 ### Vorbedingungen
+* Anleitung muss vorhanden sein
+* Sprachprüfer muss Sprache der Anleitung zugeordnet sein.
+* die Anleitung darf nicht schon sprachlich zurückgewiesen sein.
 ### Nachbedingungen
+keine
 ### verwendete Informationen
+die zurückzuweisende Anleitung
 ### Ablauf
+es wird der Status SprachlicheZurückweisung erstellt und der Anleitung hinzugefügt.
 ### Abläufe in Ausnahmefällen
+keine Angabe
 ### verbundene Anwendungsfälle
-
+keine
 
 
 # Fachprüfer
@@ -159,33 +192,53 @@ Sprachprüfer können Anleitungen eine sprachliche Zurückweisung erteilen.
 Fachprüfer können sich Anleitungen von dem ihnen zugeordneten Produkt Anzeigen lassen, die noch zu prüfen sind.
 
 ## anleitungFreigeben
-<!--TODO-->
 
 ### Kurzbeschreibung
 Fachprüfer können Anleitungen eine fachliche Freigabe erteilen.
 Wichtig ist dabei, dass Benutzer niemals eine Freigabe für Anleitungen erteilen, die sie selbst hochgeladen haben
 ### Fachliches Ziel
+einer Anleitung den Status fachlich freigegeben zuteilen
 ### Akteure
+Fachprüfer
 ### Auslöser
+Aufruf der fachlichen Freigabe durch den Fachprüfer
 ### Vorbedingungen
+* Anleitung muss vorhanden sein
+* Fachprüfer muss dem Produkt, auf das sich die Anleitung bezieht zugeordnet sein.
+* die Anleitung darf keine sprachliche Zurückweisung haben
+* die Anleitung darf nicht schon fachlich freigegeben sein
 ### Nachbedingungen
+keine
 ### verwendete Informationen
+die freizugebende Anleitung
 ### Ablauf
+es wird der Status FachlicheFreigabe erstellt und der Anleitung hinzugefügt
 ### Abläufe in Ausnahmefällen
+keine angabe
 ### verbundene Anwendungsfälle
-
+keine
 
 ## anleitungZurückweisen
-<!--TODO-->
 
 ### Kurzbeschreibung
-Sprachprüfer können Anleitungen eine sprachliche Zurückweisung erteilen.
+Fachprüfer können Anleitungen eine fachliche Zurückweisung erteilen.
 ### Fachliches Ziel
+einer Anleitung den Status fachlich Zurückgewiesen zuteilen
 ### Akteure
+Fachprüfer
 ### Auslöser
+Aufruf der fachlichen Zurückweisung durch einen Fachprüfer
 ### Vorbedingungen
+* Anleitung muss vorhanden sein
+* Fachprüfer muss dem Produkt, auf das siech die Anleitung bezieht zugeordnet sein.
+* die Anleitung darf nicht schon fachlich zurückgewiesen sein.
 ### Nachbedingungen
+keine
 ### verwendete Informationen
+die zurückzuweisende Anleitung
 ### Ablauf
+es wird der Status FachlicheZurückweisung erstellt und der Anleitung hinzugefügt.
 ### Abläufe in Ausnahmefällen
+keine Angabe
 ### verbundene Anwendungsfälle
+keine
