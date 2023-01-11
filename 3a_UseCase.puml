@@ -1,23 +1,23 @@
 ' Time Wasted 1.5H
 @startuml Alle
 
+' ROLLEN
 :Benutzer: as user
+:ProductManager: as pm
+:Administrator: as admin
+:FachPrüfer: as fp
+:SprachPrüfer: as sp
+:Übersetzer: as tr
+
+' User kann Rollen haben
+user <|-- pm
+user <|-- admin
+user <|-- fp
+user <|-- sp
+user <|-- tr
 
 rectangle ManualMasters{
-    ' ROLLEN
-    ' Sind Rollen wirklich use cases und nicht Nutzer
-    (ProductManager) as pm
-    (Administrator) as admin
-    (FachPrüfer) as fp
-    (SprachPrüfer) as sp
-    (Übersetzer) as tr
 
-    ' User kann Rollen haben
-    user -- "0..1" pm
-    user -- "0..1" admin
-    user -- "0..1" fp
-    user -- "0..1" sp
-    user -- "0..1" tr
 
     ' Admin Rolle
     (spracheAnlegen) as adminSp
@@ -27,13 +27,14 @@ rectangle ManualMasters{
     (berichtErzeugen) as adminBericht
     (übersetzungLöschen) as adminÜbDel
     (produktLöschen) as adminProdDel
-    admin ..> adminSp : <<include>>
-    admin ..> adminLd : <<include>>
-    admin ..> adminSpLd : <<include>>
-    admin ..> adminUser : <<include>>
-    admin ..> adminBericht : <<include>>
-    admin ..> adminÜbDel : <<include>>
-    admin ..> adminProdDel : <<include>>
+    admin -- adminSp
+    admin -- adminLd
+    admin -- adminSpLd
+    admin -- adminUser
+    admin -- adminBericht
+    admin -- adminÜbDel
+    admin -- adminProdDel
+    adminProdDel .> adminÜbDel : <<include>>
 
     ' Product Manager
     (produktAnlegen) as pmProdCr
@@ -42,156 +43,38 @@ rectangle ManualMasters{
     (produktSperreAufheben) as pmProdUnlock
     (fehlendeÜbersetzungenAnzeigen) as pmTrShow
     (freigabestatusAnzeigen) as pmFrei
-    pm ..> pmProdCr : <<include>>
-    pm ..> pmProdEdit : <<include>>
-    pm ..> pmProdLock : <<include>>
-    pm ..> pmProdUnlock : <<include>>
-    pm ..> pmTrShow : <<include>>
-    pm ..> pmFrei : <<include>>
+    pm -- pmProdCr
+    pm -- pmProdEdit
+    pm -- pmProdLock
+    pm -- pmProdUnlock
+    pm -- pmTrShow
+    pm -- pmFrei
 
     ' Übersetzer
     (fehlendeÜbersetzungenAnzeigen) as TrShowMissing
     (vorhandeneÜbersetzungenAnzeigen) as TrShowExisting
     (zurückgewieseneÜbersetzungenAnzeigen) as TrShowRejected
     (anleitungHochladen) as TrUp
-    tr ..> TrShowMissing : <<include>>
-    tr ..> TrShowExisting : <<include>>
-    tr ..> TrShowRejected : <<include>>
-    tr ..> TrUp : <<include>>
+    tr -- TrShowMissing
+    tr -- TrShowExisting
+    tr -- TrShowRejected
+    tr -- TrUp
 
     ' Sprachprüfer
     (freizugebendeAnleitungenAnzeigen) as spShow
     (anleitungFreigeben) as spFrei
     (anleitungZurückweisen) as spZurück
-    sp ..> spShow : <<include>>
-    sp ..> spFrei : <<include>>
-    sp ..> spZurück : <<include>>
+    sp -- spShow
+    sp -- spFrei
+    sp -- spZurück
 
     ' Fachprüfer
     (freizugebendeAnleitungenAnzeigen) as fpShow
     (anleitungFreigeben) as fpFrei
     (anleitungZurückweisen) as fpZurück
-    fp ..> fpShow : <<include>>
-    fp ..> fpFrei : <<include>>
-    fp ..> fpZurück : <<include>>
-}
-
-@enduml
-
-@startuml Admin
-:Benutzer: as user
-
-rectangle ManualMasters{
-    ' ROLLEN
-    ' Sind Rollen wirklich use cases und nicht Nutzer
-    (Administrator) as admin
-
-    ' User kann Rollen haben
-    user -- "0..1" admin
-    
-    ' Admin Rolle
-    (spracheAnlegen) as adminSp
-    (landAnlegen) as adminLd
-    (landSpracheZuordnen) as adminSpLd
-    (benutzerPflegen) as adminUser
-    (berichtErzeugen) as adminBericht
-    (übersetzungLöschen) as adminÜbDel
-    (produktLöschen) as adminProdDel
-    admin ..> adminSp : <<include>>
-    admin ..> adminLd : <<include>>
-    admin ..> adminSpLd : <<include>>
-    admin ..> adminUser : <<include>>
-    admin ..> adminBericht : <<include>>
-    admin ..> adminÜbDel : <<include>>
-    admin ..> adminProdDel : <<include>>
-
-}
-@enduml
-
-@startuml ProduktManager
-
-:Benutzer: as user
-
-rectangle ManualMasters{
-    ' ROLLEN
-    ' Sind Rollen wirklich use cases und nicht Nutzer
-    (ProductManager) as pm
-
-    ' User kann Rollen haben
-    user -- "0..1" pm
-
-    ' Product Manager
-    (produktAnlegen) as pmProdCr
-    (produktBearbeiten) as pmProdEdit
-    (produktSperren) as pmProdLock
-    (produktSperreAufheben) as pmProdUnlock
-    (fehlendeÜbersetzungenAnzeigen) as pmTrShow
-    (freigabestatusAnzeigen) as pmFrei
-    pm ..> pmProdCr : <<include>>
-    pm ..> pmProdEdit : <<include>>
-    pm ..> pmProdLock : <<include>>
-    pm ..> pmProdUnlock : <<include>>
-    pm ..> pmTrShow : <<include>>
-    pm ..> pmFrei : <<include>>
-
-}
-
-@enduml
-
-@startuml Übersetzer
-
-:Benutzer: as user
-
-rectangle ManualMasters{
-    ' ROLLEN
-    ' Sind Rollen wirklich use cases und nicht Nutzer
-    (Übersetzer) as tr
-
-    ' User kann Rollen haben
-    user -- "0..1" tr
-
-    ' Übersetzer
-    (fehlendeÜbersetzungenAnzeigen) as TrShowMissing
-    (vorhandeneÜbersetzungenAnzeigen) as TrShowExisting
-    (zurückgewieseneÜbersetzungenAnzeigen) as TrShowRejected
-    (anleitungHochladen) as TrUp
-    tr ..> TrShowMissing : <<include>>
-    tr ..> TrShowExisting : <<include>>
-    tr ..> TrShowRejected : <<include>>
-    tr ..> TrUp : <<include>>
-
-}
-@enduml
-
-@startuml Prüfer
-
-:Benutzer: as user
-
-rectangle ManualMasters{
-    ' ROLLEN
-    ' Sind Rollen wirklich use cases und nicht Nutzer
-    (FachPrüfer) as fp
-    (SprachPrüfer) as sp
-
-    ' User kann Rollen haben
-    user -- "0..1" fp
-    user -- "0..1" sp
-
-    ' Sprachprüfer
-    (freizugebendeAnleitungenAnzeigen) as spShow
-    (anleitungFreigeben) as spFrei
-    (anleitungZurückweisen) as spZurück
-    sp ..> spShow : <<include>>
-    sp ..> spFrei : <<include>>
-    sp ..> spZurück : <<include>>
-
-    ' Fachprüfer
-    (freizugebendeAnleitungenAnzeigen) as fpShow
-    (anleitungFreigeben) as fpFrei
-    (anleitungZurückweisen) as fpZurück
-    fp ..> fpShow : <<include>>
-    fp ..> fpFrei : <<include>>
-    fp ..> fpZurück : <<include>>
+    fp -- fpShow
+    fp -- fpFrei
+    fp -- fpZurück
 }
 
 @enduml

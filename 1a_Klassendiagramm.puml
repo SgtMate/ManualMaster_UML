@@ -79,10 +79,10 @@ interface Prüfer{
     + anleitungZurückweisen(anleitung : Anleitung, begründung: String)
 }
 class Sprachprüfer
-Prüfer --|> Sprachprüfer
+Prüfer <|-- Sprachprüfer
 Sprachprüfer "*" -- "1" Sprache : Prüft >
 class Fachprüfer
-Prüfer --|> Fachprüfer
+Prüfer <|-- Fachprüfer
 Fachprüfer "*" -- "1" Produkt : Prüft >
 
 Rolle <|-- ProduktManager
