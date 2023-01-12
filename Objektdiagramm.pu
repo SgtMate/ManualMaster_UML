@@ -76,10 +76,6 @@ slk2 o-- l2
 slk3 o-- s1
 slk3 o-- l3
 
-s1 -- l1 : spricht
-s1 -- l2 : spricht
-s1 -- l3 : spricht
-
 p1 -- l1 : vertrieben
 p1 -- l2 : vertrieben
 p1 -- l3 : vertrieben
@@ -91,9 +87,6 @@ a1 -- slk2 : verfasstIn
 a2 -- slk1 : verfasstIn
 ue1 -- a1 : lädtHoch
 ue1 -- a2 : lädtHoch
-
-sp1 -- f1 : freigegebenVon
-sp1 -- z1 : zurückgewiesenVon
 
 a2 -- f1
 a1 -- z1
