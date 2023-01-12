@@ -79,7 +79,6 @@ Rolle <|-- Fachprüfer
 Rolle <|-- Sprachprüfer
 
 Produkt "0..*" -- "1..*" Land : vertrieben
-Land "1..*" -- "1..*" Sprache : gesprochen
 Land_Sprach_Kombination "1" o-- "1" Land
 Land_Sprach_Kombination "1" o-- "1" Sprache
 Anleitung "1" -- "1" Land_Sprach_Kombination : verfasstIn
@@ -87,12 +86,6 @@ Produkt "1" *-- "0..1" Sperre
 Produkt "1" *-- "1..*" Anleitung
 Benutzer "0..*" *-- "0..4" Rolle
 
-Fachprüfer "1" -- "0..*" Zurückweisung : zurückgewiesenVon
-Fachprüfer "1" -- "0..*" Freigabe : freigegebenVon
-Sprachprüfer "1" -- "0..*" Zurückweisung : zurückgewiesenVon
-Sprachprüfer "1" -- "0..*" Freigabe : freigegebenVon
-
-ProduktManager "1" -- "0..*" Produkt : verwaltet
 ProduktManager "1" -- "0..*" Sperre : erstellt
 Übersetzer "0..*" -- "0..*" Land_Sprach_Kombination : übersetztFür
 Übersetzer "1" -- "0..*" Anleitung : lädtHoch
