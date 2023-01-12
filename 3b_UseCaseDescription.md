@@ -1,4 +1,4 @@
-# admin
+<!--TIMEWASTED: 8h-->
 
 ## spracheAnlegen
 
@@ -34,18 +34,16 @@ es kann ein Bericht erzeugt werden, der beinhaltet,
 welcher Benutzer welche Anleitungen hochgeladen hat
 und welche Benutzer welche Freigaben und Sperrungen veranlasst haben.
 
-## übersetzungLöschen
+## anleitungLöschen
 
-Übersetzungen könne gelöscht werden.
-Das kann allerdings nicht geschehen, wenn die Übersetzung final
+Anleitungen könne gelöscht werden.
+Das kann allerdings nicht geschehen, wenn die Anleitung final
 und Teil eines gesperrten Produkts ist.
 
 ## produktLöschen
 
 Produkte können gelöscht werden.
 Das geht allerdings nur, wenn das Produkt nicht gesperrt ist.
-
-# Produkt Manager
 
 ## produktAnlegen
 
@@ -73,7 +71,7 @@ der die Sperre veranlasst hat, wieder aufgehoben werden.
 Alle durch die Sperre eingeschränkten Tätigkeiten
 können dann wieder durchgeführt werden.
 
-## fehlendeÜbersetzungenAnzeigen
+## fehlendeAnleitungenAnzeigen für Produkte
 
 Produktmanager können sich anzeigen lassen
 für welche Produkte noch welche Anleitungen fehlen.
@@ -82,21 +80,20 @@ für welche Produkte noch welche Anleitungen fehlen.
 
 Es kann der Freigabestatus für die Produkte angezeigt werden.
 
-# Übersetzer
 
-## fehlendeÜbersetzungenAnzeigen
+## fehlendeAnleitungenAnzeigen für Land-Sprach Kombinationen
 
 Übersetzer können sich anzeigen lassen für welche Produkte
-noch Übersetzungen in der ihnen zugewiesenen Land-Sprach Kombination fehlen. 
+noch Anleitungen in der ihnen zugewiesenen Land-Sprach Kombination fehlen. 
 
-## vorhandeneÜbersetzungenAnzeigen
+## vorhandeneAnleitungenAnzeigen
 
 Es kann angezeigt werden, für welche Produkte
-Übersetzungen in der einem Übersetzer zugewiesenen Land-Sprach Kombination vorhanden sind.
+Anleitungen in der einem Übersetzer zugewiesenen Land-Sprach Kombination vorhanden sind.
 
-## zurückgewieseneÜbersetzungenAnzeigen
+## zurückgewieseneAnleitungenAnzeigen
 
-Übersetzer können die zurückgewiesenen Übersetzungen,
+Übersetzer können die zurückgewiesenen Anleitungen,
 die sie hochgeladen haben anzeigen.
 
 ## anleitungHochladen
@@ -104,9 +101,8 @@ die sie hochgeladen haben anzeigen.
 Übersetzer können Anleitungen in der ihnen zugeordneten Land-Sprach
 Kombination hochladen 
 
-# Sprachprüfer
+## sprachlich freizugebendeAnleitungenAnzeigen
 
-## freizugebendeAnleitungenAnzeigen
 ### Kurzbeschreibung
 Sprachprüfer können sich Anleitungen in der ihnen zugeordneten Sprache Anzeigen lassen, die noch zu prüfen sind.
 ### Fachliches Ziel
@@ -132,7 +128,7 @@ keine Angabe
 ### verbundene Anwendungsfälle
 keine
 
-## anleitungFreigeben
+## sprachlich anleitungFreigeben
 
 ### Kurzbeschreibung
 Sprachprüfer können Anleitungen eine sprachliche Freigabe erteilen.
@@ -160,7 +156,7 @@ keine Angabe
 keine
 
 
-## anleitungZurückweisen
+## sprachlich anleitungZurückweisen
 
 ### Kurzbeschreibung
 Sprachprüfer können Anleitungen eine sprachliche Zurückweisung erteilen.
@@ -185,9 +181,7 @@ keine Angabe
 ### verbundene Anwendungsfälle
 keine
 
-
-# Fachprüfer
-## freizugebendeAnleitungenAnzeigen
+## fachlich freizugebendeAnleitungenAnzeigen
 
 Fachprüfer können sich Anleitungen von dem ihnen zugeordneten Produkt Anzeigen lassen, die noch zu prüfen sind.
 
@@ -218,7 +212,7 @@ keine angabe
 ### verbundene Anwendungsfälle
 keine
 
-## anleitungZurückweisen
+## fachlich anleitungZurückweisen
 
 ### Kurzbeschreibung
 Fachprüfer können Anleitungen eine fachliche Zurückweisung erteilen.

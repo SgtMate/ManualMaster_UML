@@ -1,27 +1,19 @@
-'' 2h
+'' 5h
 
 @startuml 1b
 
-note "KORREKTE UML SYNTAX BEIM ABZEICHNEN BEACHTEN!!!" as n2
-
-'' Paragraph 1
-
-note "verbundene Objekte gehören eigentlich\n(sofern möglich) ineinander geschachtelt" as n1
-
 object "Alfred:Benutzer" as b1{
     benutzername = "alfred"
-    rolle
 }
 object "rolle:Administrator" as r1
-b1::rolle - r1
+b1 -- r1
 
 
 object "Ulrich:Benutzer" as b2{
     benutzername = "ulrich"
-    rolle
 }
 object "rolle:Übersetzer" as ü2
-b2::rolle - ü2
+b2 -- ü2
 
 'object "Uwe:Benutzer" as b3{
 '    benutzername = "uwe"
@@ -46,24 +38,21 @@ b2::rolle - ü2
 
 object "Siggi:Benutzer" as b6{
     benutzername = "siggi"
-    rolle
 }
 object "rolle:Sprachprüfer" as s6
-b6::rolle - s6
+b6 -- s6
 
 object "Ferdinand:Benutzer" as b7{
     benutzername = "ferdinand"
-    rolle
 }
 object "rolle:Fachprüfer" as f7
-b7::rolle - f7
+b7 -- f7
 
 object "Peter:Benutzer" as b8{
     benutzername = "peter"
-    rolle
 }
 object "rolle:ProduktManager" as p8
-b8::rolle - p8
+b8 -- p8
 
 '' Paragraph 2
 
@@ -96,22 +85,27 @@ object "Deutsch:Sprache" as de{
 '}
 
 '' P4
+object "DE_de:LandSprachKombi" as DEde
+object "LU_de:LandSprachKombi" as LUde
 
-DE -- de
+DE -- DEde
+de -- DEde
+de -- LUde
 'CH -- fr
 'CH -- it
 'CH -- de
 'LU -- fr
-LU -- de
+LU -- LUde
 'LU -- lb
 'FR -- fr
+s6 -- de
 
-ü2 - (DE,de)
+ü2 - DEde
 'ü3 -- (CH,fr)
 'ü4 - (CH,it)
 'ü2 -- (CH,de)
 'ü3 - (LU,fr)
-ü2 -- (LU,de)
+ü2 -- LUde
 'ü5 - (LU,lb)
 'ü3 -- (FR,fr)
 
@@ -124,19 +118,24 @@ object "SmartToaster:Produkt" as st{
 st -- DE
 st -- CH
 st -- LU
+f7 -- st
 
 '' P6
 object "SmartToasterLUde:Anleitung" as stLUde{
     final = false
+    datei = Blob
 }
-stLUde -- de
-stLUde -- LU
+stLUde -- LUde
+
+ü2 -- stLUde
 
 object "SmartToasterDEde:Anleitung" as stDEde{
     final = false
+    Datei = Blob
 }
-stDEde -- de
-stDEde -- DE
+stDEde -- DEde
+
+ü2 -- stDEde
 
 '' P7
 '

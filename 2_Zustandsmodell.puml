@@ -1,57 +1,41 @@
-' TIME WASTED: 2h
+' TIME WASTED: 5h
 @startuml
 
-' Für Anleitungen
-' Also wie Anleitungen gepflegt werden
+[*] --> Processing : anleitungHochladen(anleitung)
+state Processing{
+    state "Anleitung hochgeladen" as av
+    [*] --> av
+    state "sprachlich Freigegeben" as sprachFrei
+    state "fachlich Freigegeben" as fachFrei
+    state "sprachlich zurückgewiesen" as sprachZurück
+    state "fachlich zurückgewisesn" as fachZurück
+    state "fachlich und sprachlich zurückgewiesen" as fachSprachZurück
+    state "fachlich zurückgewiesen,\nsprachlich freigegeben" as fachZurückSprachFrei
+    state "fachlich freigegeben,\nsprachlich zurückgewiesen" as fachFreiSprachZurück
+    state "final" as final
+    
+    av --> sprachFrei : anleitungFreigeben(anleitung, begründung{optional})\n[prüfer!=ersteller, rolle: Sprachprüfer]
+    av --> fachFrei : anleitungFreigeben(anleitung, begründung{optional})\n[prüfer!=ersteller, rolle: Fachprüfer]
 
-' TODO Benutzer dürfen niemals Freigaben erteilen für Übersetzungen,
-' TODO die sie selbst hochgeladen haben.
+    sprachFrei --> fachZurückSprachFrei : anleitungZurückweisen(anleitung, begründung)\n[rolle: Fachprüfer]
+    fachFrei --> fachFreiSprachZurück : anleitungZurückweisen(anleitung, begründung)\n[rolle: Sprachprüfer]
 
+    sprachFrei --> final : anleitungFreigeben(anleitung, begründung{optional})\n[prüfer!=ersteller, rolle: Fachprüfer]
+    fachFrei --> final : anleitungFreigeben(anleitung, begründung{optional})\n[prüfer!=ersteller, rolle: Sprachprüfer]
 
-note as n1
-    "Eine Fachlich oder Sprachlich zurückgewiesene
-    Übersetzung kann in keinerei Hinsicht freigegeben werden"
-end note
-
-[*] --> prodExists : produktAnlegen()
-state "Produkt existiert" as prodExists{
-    [*] --> missing
-    state "Anleitung in\nSprache-Land Kombi fehlt" as missing
-    missing --> Processing : anleitungHochladen()
-    state Processing{
-        state "Anleitung hochgeladen" as av
-        [*] --> av
-        state "sprachlich Freigegeben" as sprachFrei
-        state "fachlich Freigegeben" as fachFrei
-        state "final" as final
-        state "sprachlich zurückgewiesen" as sprachZurück
-        state "sprachlich zurückgewiesen" as sprachZurück1
-        state "fachlich zurückgewisesn" as fachZurück
-        state "fachlich zurückgewisesn" as fachZurück1
-
-        ' TODO übergänge sind noch nicht eindeutig.
-        av --> sprachFrei : anleitungFreigeben()
-        sprachFrei -> fachZurück : anleitungZurückweisen()
-        av --> fachFrei : anleitungFreigeben()
-        fachFrei -> sprachZurück : anleitungZurückweisen()
-        sprachFrei --> final : anleitungFreigeben()
-        fachFrei --> final : anleitungFreigeben()
-        av -> fachZurück1 : anleitungZurückweisen()
-        av -> sprachZurück1 : anleitungZurückweisen()
-        sprachZurück1 --> fachZurück : anleitungZurückweisen()
-        fachZurück1 --> sprachZurück : anleitungZurückweisen()
-
-        av <-- final : anleitungHochladen()
-    }
-    Processing --> missing : übersetzungLöschen()
+    av -> fachZurück : anleitungZurückweisen(anleitung, begründung{optional})\n[rolle: Fachprüfer]
+    av -> sprachZurück : anleitungZurückweisen(anleitung, begründung{optional})\n[rolle: Sprachprüfer]
+    sprachZurück --> fachSprachZurück : anleitungZurückweisen(anleitung, begründung)\n[rolle: Fachprüfer]
+    fachZurück --> fachSprachZurück : anleitungZurückweisen(anleitung, begründung)\n[rolle: Sprachprüfer]
 }
-state "Produkt gesperrt" as prodLock{
-    state "Anleitung gesperrt" as gesperrt
-}
-final -> gesperrt : produktSperren()
-final <- gesperrt : produktSperreAufheben()
-prodExists --> prodLock : produktSperren()
-prodExists <-- prodLock : produktSperreAufheben()
-prodExists --> [*] : produktLöschen()
+Processing <-- Processing : anleitungHochladen(anleitung)
+
+Processing --> [*] : anleitungLöschen(anleitung)
+Processing --> [*] : produktLöschen(produkt)
+
+state "Anleitung gesperrt" as gesperrt
+
+final --> gesperrt : produktSperren(produkt)
+final <-- gesperrt : produktSperreAufheben(produkt)
 
 @enduml

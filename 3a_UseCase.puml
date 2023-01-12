@@ -1,4 +1,4 @@
-' Time Wasted 1.5H
+' Time Wasted 7H
 @startuml Alle
 
 ' ROLLEN
@@ -25,7 +25,7 @@ rectangle ManualMasters{
     (landSpracheZuordnen) as adminSpLd
     (benutzerPflegen) as adminUser
     (berichtErzeugen) as adminBericht
-    (übersetzungLöschen) as adminÜbDel
+    (anleitungLöschen) as adminÜbDel
     (produktLöschen) as adminProdDel
     admin -- adminSp
     admin -- adminLd
@@ -41,7 +41,7 @@ rectangle ManualMasters{
     (produktBearbeiten) as pmProdEdit
     (produktSperren) as pmProdLock
     (produktSperreAufheben) as pmProdUnlock
-    (fehlendeÜbersetzungenAnzeigen) as pmTrShow
+    (fehlendeAnleitungenAnzeigen für Produkte) as pmTrShow
     (freigabestatusAnzeigen) as pmFrei
     pm -- pmProdCr
     pm -- pmProdEdit
@@ -51,9 +51,9 @@ rectangle ManualMasters{
     pm -- pmFrei
 
     ' Übersetzer
-    (fehlendeÜbersetzungenAnzeigen) as TrShowMissing
-    (vorhandeneÜbersetzungenAnzeigen) as TrShowExisting
-    (zurückgewieseneÜbersetzungenAnzeigen) as TrShowRejected
+    (fehlendeAnleitungenAnzeigen für Land-Sprach Kombinationen) as TrShowMissing
+    (vorhandeneAnleitungenAnzeigen) as TrShowExisting
+    (zurückgewieseneAnleitungenAnzeigen) as TrShowRejected
     (anleitungHochladen) as TrUp
     tr -- TrShowMissing
     tr -- TrShowExisting
@@ -61,17 +61,17 @@ rectangle ManualMasters{
     tr -- TrUp
 
     ' Sprachprüfer
-    (freizugebendeAnleitungenAnzeigen) as spShow
-    (anleitungFreigeben) as spFrei
-    (anleitungZurückweisen) as spZurück
+    (sprachlich freizugebendeAnleitungenAnzeigen) as spShow
+    (sprachlich anleitungFreigeben) as spFrei
+    (sprachlich anleitungZurückweisen) as spZurück
     sp -- spShow
     sp -- spFrei
     sp -- spZurück
 
     ' Fachprüfer
-    (freizugebendeAnleitungenAnzeigen) as fpShow
-    (anleitungFreigeben) as fpFrei
-    (anleitungZurückweisen) as fpZurück
+    (fachlich freizugebendeAnleitungenAnzeigen) as fpShow
+    (fachlich anleitungFreigeben) as fpFrei
+    (fachlich anleitungZurückweisen) as fpZurück
     fp -- fpShow
     fp -- fpFrei
     fp -- fpZurück

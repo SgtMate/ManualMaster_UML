@@ -1,13 +1,14 @@
-'' 3h
+'' 7h
 
 @startuml 1a
 
 class Produkt{
     + name: String
-    + gesperrt: Boolean
 }
 Produkt "1" -- "*" Anleitung
 Produkt "*" -- "*" Land : wird vertrieben in >
+Produkt "1" -- "0..1" Sperre
+
 
 class Land{
     + bezeichnung: String
@@ -15,7 +16,9 @@ class Land{
 class Sprache{
     + bezeichung: String
 }
-Land "1..*" -- "1..*" Sprache
+LandSprachKombination "*" -- "1" Sprache
+LandSprachKombination "*" -- "1" Land
+
 
 class Freigabe{
     + begrüngung : String{Optional}
@@ -23,25 +26,20 @@ class Freigabe{
 class Zurückweisung{
     + begründung : String
 }
-Freigabe <|-- FachlicheFreigabe
-Freigabe <|-- SprachlicheFreigabe
-Zurückweisung <|-- FachlicheZurückweisung
-Zurückweisung <|-- SprachlicheZurückweisung
-FachlicheAntwort <|-- FachlicheZurückweisung
-FachlicheAntwort <|-- FachlicheFreigabe
-SprachlicheAntwort <|-- SprachlicheZurückweisung
-SprachlicheAntwort <|-- SprachlicheFreigabe
+interface Antwort{
+
+}
+Antwort <|-- Freigabe
+Antwort <|-- Zurückweisung
+
 '' Anleitungen pflegen, wenn das Produkt dort vertrieben wird
 '' Finale anleitungen erneut hochladen
 class Anleitung{
-    + land: Land
-    + sprache: Sprache
+    + datei : Blob
     + final: Boolean
 }
-note right: das ist nicht so schön\nFachliche und Sprachliche Antwort\nsind schlecht so
-Anleitung "1" - "1" FachlicheAntwort
-Anleitung "1" -- "1" SprachlicheAntwort
-
+Anleitung "1" -- "0..2" Antwort
+LandSprachKombination "1"-- "*" Anleitung
 
 class Rolle
 class ProduktManager{
@@ -50,9 +48,11 @@ class ProduktManager{
     + produktSperren(produkt : Produkt) 
     '' Nur Produktmanager, der die Sperre veranlasst hat, kann diese wieder aufheben
     + produktSperreAufheben(produkt : Produkt)
-    + fehlendeÜbersetzungenAnzeigen()
+    + fehlendeAnleitungenAnzeigen()
     + freigabestatusAnzeigen()
 }
+ProduktManager "1" -- "*" Sperre : erstellt/löscht Sperre\n(sperrt/entsperrt Produkt) >
+
 class Administrator{
     + spracheAnlegen()
     + landAnlegen()
@@ -60,19 +60,19 @@ class Administrator{
     '' TODO
     + benutzerPflegen()
     + berichtErzeugen()
-    + übersetzungLöschen(übersetzung : Anleitung)
+    + anleitungLöschen(anleitung : Anleitung)
     + produktLöschen(produkt : Produkt)
 }
 
 '' Land Sprach Kombination für übersetzre
 class Übersetzer{
-    + fehlendeÜbersetzungenAnzeigen()
-    + vorhandeneÜbersetzungenAnzeigen()
-    + zurückgewieseneÜbersetzungenAnzeigen()
+    + fehlendeAnleitungenAnzeigen()
+    + vorhandeneAnleitungenAnzeigen()
+    + zurückgewieseneAnleitungenAnzeigen()
     + anleitungHochladen(anleitung : Anleitung)
 }
-note bottom: kümmert sich um mehrere Land/Sprachen kombis
-(Land, Sprache) - Übersetzer : many -- many
+Übersetzer "1" -- "*" LandSprachKombination
+Übersetzer "1" -- "*" Anleitung
 interface Prüfer{
     + freizugebendeAnleitungenAnzeigen()
     + anleitungFreigeben(anleitung : Anleitung, begründung : String{Optinal})
